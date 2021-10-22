@@ -39,8 +39,7 @@ backend:
     service: k8s
 tileInfo:
     - title: 1. Create Operator
-      description:
-          Create Operator from the local K8s from this Lab.
+      description: Create Operator from the local K8s from this Lab.
       duration: 15 min
       content: CreateFromK8s.md
     - title: 2. Test Operator
