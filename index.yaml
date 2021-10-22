@@ -25,6 +25,10 @@ environment:
     terminal:
         name: Terminal
         enabled: true
+    ide:
+        name: IDE
+        enabled: true
+        url: '{{ IDE.url }}'
     application:
         name: App Preview
         url: '{{ DNS.host }}'
