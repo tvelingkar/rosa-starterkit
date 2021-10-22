@@ -27,8 +27,8 @@ environment:
         enabled: true
     application:
         name: App Preview
-        url: '{{ DNS.host }}:3000'
-        enabled: true
+        url: '{{ DNS.host }}'
+        enabled: false
 config:
     launchBtn:
         buttonLabel: Launch
