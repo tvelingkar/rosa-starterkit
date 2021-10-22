@@ -1,0 +1,58 @@
+---
+name: Kubernetes and OpenShift Operator StarterKit
+description: Convert your Helm Charts, Docker images and Kubernetes setups into Operators with a few clicks. You can test the Operator created before downloading it.
+branding:
+    logo: _images/StarterKitLogo.png
+    banner: _images/banner.png
+    textColor: '#FFFFFF'
+    header:
+        text: Starter Kit
+        logo: _images/StarterKitLogo.png
+license: 
+duration: 30 mins
+categories:
+    - Backend
+    - Express
+    - Frontend
+intro: readme.md
+documentation: 
+commands:
+    - name: Setup the tool
+      cmd: <execute the script>
+      cwd: /home/student
+      stepMessage: Setting up the tool ....
+environment:
+    terminal:
+        name: Terminal
+        enabled: true
+    application:
+        name: App Preview
+        url: '{{ DNS.host }}:3000'
+        enabled: true
+config:
+    launchBtn:
+        buttonLabel: Launch
+    execCmd : 
+        autoExecute: false
+        buttonLabel: Execute Commands
+backend:
+    service: k8s
+tileInfo:
+    - title: 1. Create Operator
+      description:
+          Create Operator from the local K8s from this Lab.
+      duration: 15 min
+      content: CreateFromK8s.md
+    - title: 2. Test Operator
+      description: Install the Operator on the local K8s from this Lab.
+      duration: 5 min
+      content: TestOnK8s.md
+    - title: 3. Clean-up Operator
+      description: Uninstall the Operator from the local K8s from this Lab.
+      duration: 5 min
+      content: DeleteFromK8s.md
+    - title: 4. Download Operator
+      description: Download the Operator code.
+      duration: 5 min
+      content: Download.md
+

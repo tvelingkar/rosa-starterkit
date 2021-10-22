@@ -1,0 +1,46 @@
+{
+  "name": "Create Operator",
+  "appLayout": "accordion",
+  "appTheme": "g90",
+  "footer": "footer.md",
+  "tutorials": [
+    {
+      "description": "Create Operator from the local K8s from this Lab",
+      "duration": "10",
+      "title": "Create Operator",
+      "tutorial_name": "CreateFromK8s.md"
+    },
+    {
+      "description": "Install the Operator on the local K8s from this Lab",
+      "duration": "5",
+      "title": "Test Operator",
+      "tutorial_name": "TestOnK8s.md"
+    },
+    {
+      "description": "Uninstall the Operator from the local K8s from this Lab",
+      "duration": "5",
+      "title": "Clean-up Operator",
+      "tutorial_name": "DeleteFromK8s.md"
+    },
+    {
+      "description": "Download the Operator code",
+      "duration": "5",
+      "title": "Download Operator",
+      "tutorial_name": "Download.md"
+    }
+  ],
+  "usefulLinks": [
+    {
+      "description": "",
+      "url": "",
+      "title": ""
+    }
+  ],
+  "demos": [
+    {
+      "description": "",
+      "url": "",
+      "title": ""
+    }
+  ]
+}
