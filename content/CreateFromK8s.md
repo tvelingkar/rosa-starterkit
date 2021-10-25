@@ -1,6 +1,8 @@
 ### 1 - Select the Method of creating Operator
 
-Accordian text goes here
+This tutorial explains creating an Operator from the Kubernetes setup in the Lab VM.
+
+
 
 ### 2 - Give the operator details
 
