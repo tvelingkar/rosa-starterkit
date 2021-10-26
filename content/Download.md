@@ -1,4 +1,4 @@
-### 1- Download the Operator Code
+### 1 - Download the Operator Code
 
 Goto the **Submit and Download** tab. Click the **Download** button.
 
