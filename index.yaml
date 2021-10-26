@@ -48,13 +48,9 @@ tileInfo:
       content: CreateFromK8s.md
     - title: 2. Test Operator
       description: Install the Operator on the local K8s from this Lab.
-      duration: 5 min
+      duration: 10 min
       content: TestOnK8s.md
-    - title: 3. Clean-up Operator
-      description: Uninstall the Operator from the local K8s from this Lab.
-      duration: 5 min
-      content: DeleteFromK8s.md
-    - title: 4. Download Operator
+    - title: 3. Download Operator
       description: Download the Operator code.
       duration: 5 min
       content: Download.md

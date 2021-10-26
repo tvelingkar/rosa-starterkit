@@ -1,9 +1,7 @@
-This tutorial explains creating an Ansible Operator from the Kubernetes setup provided out of the box with this Lab.
-
-Open the application: URL-   http://##DNS.IP##:3000
-
 ### 1 - Start creating the Operator
 
+This tutorial explains creating an Ansible Operator from the Kubernetes setup provided out of the box with this Lab.
+Open the application: URL-   http://##DNS.IP##:3000
 ![CreateOperator1](../_images/CreateOperator1.png)
 
 ### 2 - Select the Method of creating Operator
