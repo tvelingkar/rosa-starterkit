@@ -1,41 +1,51 @@
-### 1 - Select the Method of creating Operator
+### 
 
-This tutorial explains creating an Operator from the Kubernetes setup in the Lab VM.
+This tutorial explains creating an Ansible Operator from the Kubernetes setup provided out of the box with this Lab.
 
+Open the application: URL-   http://##DNS.IP##:3000
 
+### 1 - Start creating the Operator
 
-### 2 - Give the operator details
+![CreateOperator1](_images/CreateOperator1.png)
 
-User can define values as below which needs to be replaced dynamically during run time.
+### 2 - Select the Method of creating Operator
 
-URL :  http://##DNS.IP##:30455
+Choose the Operator Method as **Ansible Operator from Existing Kubernetes Resources**
 
-### 3 - Login to the local K8s and fetch the resources
-xxx
-![codestructure](_images/mvc-db-structure.png)
+![OperatorMethod](_images/OperatorMethod.png)
+
+### 3 - Give the operator details and fetch the resources
+
+Give the name of the Operator and details as below.
+
+Since we are fetching from the Kubernetes provided out of the box, select **Use local Kubernetes** option and click button **Use local Kubernetes**.
+
+Give the namespace from where resources are to be fetched. For this lab give the namespace as **local-k8s-setup**. Click button **Fetch resources** .
+
+ 
+
+![OperatorDetails](_images/OperatorDetails.png)
+
+The **Add Kind +** option on the left panel will be enabled only if the resources are fetched successfully.
 
 ### 4 - Create a Kind using the K8s resources
 
-Simple text to demonstrate ul li :
-- list text 1.
-- list text 2.
-- list text 3.
+Add a new CRD(Kind) using **Add Kind +**
+
+Give the kind name. Select the resources that will make up the CRD.
+
+### ![Kinddetails](_images/Kinddetails.png)
+
+More than 1 Kind can be added.
 
 ### 5 - Create the Operator
 
-Open terminal tab from dashboard to execute any commands. 
+Goto the Submit & Download tab.
 
-One can execute them by clicking :
+Click **Submit Operator** to create the Operator.
 
-```execute
-pwd
-```
+![Submit](_images/Submit.png)
 
-One can copy them by clicking :
+If the Operator is created successfully, you will see a message as below.
 
-```copy
-ls -l
-```
-
-
-
+![SubmitSuccessful](_images/SubmitSuccessful.png)
