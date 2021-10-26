@@ -4,7 +4,7 @@ description: Convert your Helm Charts, Docker images and Kubernetes setups into 
 branding:
     logo: _images/StarterKitLogo.png
     banner: _images/banner.png
-    textColor: '#FFFFFF'
+    textColor: '#000000'
     header:
         text: Starter Kit
         logo: _images/StarterKitLogo.png
@@ -18,7 +18,7 @@ intro: readme.md
 documentation: 
 commands:
     - name: Setup the tool
-      cmd: <execute the script>
+      cmd: ls -lh
       cwd: /home/student
       stepMessage: Setting up the tool ....
 environment:
