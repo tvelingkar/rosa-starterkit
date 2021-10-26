@@ -1,5 +1,3 @@
-### 
-
 This tutorial explains creating an Ansible Operator from the Kubernetes setup provided out of the box with this Lab.
 
 Open the application: URL-   http://##DNS.IP##:3000
@@ -34,7 +32,7 @@ Add a new CRD(Kind) using **Add Kind +**
 
 Give the kind name. Select the resources that will make up the CRD.
 
-### ![Kinddetails](../_images/Kinddetails.png)
+![Kinddetails](../_images/Kinddetails.png)
 
 More than 1 Kind can be added.
 
