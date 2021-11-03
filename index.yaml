@@ -27,7 +27,7 @@ environment:
         enabled: true
     ide:
         name: IDE
-        enabled: false
+        enabled: true
         url: '{{ IDE.url }}'
     application:
         name: StarterKit
@@ -46,6 +46,10 @@ tileInfo:
       description: Create a simple Nginx application on the local K8s.
       duration: 10 min
       content: SetupNginxK8s.md
+    - title: For Lak using APIs
+      description: This is a temporary lab using APIs only
+      duration: 10 min
+      content: SamplelabforROSA.md
     - title: 1. Create Operator
       description: Create Operator from the local K8s from this Lab.
       duration: 15 min

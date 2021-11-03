@@ -149,3 +149,8 @@ kubectl create -f nginxapp.yaml -n local-k8s-setup
 kubectl get svc,pod,configmap,secret -n local-k8s-setup
 ```
 
+Check the URL in the browser
+
+```execute
+echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service nginxsvc -n local-k8s-setup -o custom-columns=:spec.ports[0].nodePort | tail -1)"
+```
