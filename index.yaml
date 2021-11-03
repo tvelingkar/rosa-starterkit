@@ -42,6 +42,10 @@ config:
 backend:
     service: k8s
 tileInfo:
+    - title: Option 1. Setup Nginx application
+      description: Create a simple Nginx application on the local K8s.
+      duration: 10 min
+      content: SetupNginxK8s.md
     - title: 1. Create Operator
       description: Create Operator from the local K8s from this Lab.
       duration: 15 min
