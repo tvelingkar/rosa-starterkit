@@ -18,7 +18,7 @@ intro: readme.md
 documentation: 
 commands:
     - name: Setup the tool
-      cmd: ls -lh
+      cmd: 
       cwd: /home/student
       stepMessage: Setting up the tool ....
 environment:
@@ -27,12 +27,12 @@ environment:
         enabled: true
     ide:
         name: IDE
-        enabled: true
+        enabled: false
         url: '{{ IDE.url }}'
     application:
-        name: App Preview
-        url: '{{ DNS.host }}'
-        enabled: false
+        name: StarterKit
+        url: '{{ DNS.host }}/starterkit'
+        enabled: true
 config:
     launchBtn:
         buttonLabel: Launch

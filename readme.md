@@ -18,6 +18,10 @@ To create an Operator for his application, the user can bring in his Helm Chart,
 
 In this tutorial,we are going to cover following topics:
 
+Option A: Create a sample nginx application whose Operator will be created
+
+Option B: 
+
 1. Create Operator from the local K8s from this Lab
 2. Install the Operator on the local K8s from this Lab
 3. Uninstall the Operator from the local K8s from this Lab

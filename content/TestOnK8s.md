@@ -4,9 +4,11 @@ Test the Operator by deploying it on the Local Kubernetes provided out of the bo
 
 Goto the **Test** tab. Select the **Use Default Kubernetes** option. Click **Deploy**.
 
-
+![Deploy](../_images/Deploy.png)
 
 ### 2 - Deploy the Operator
+
+![DeploySuccessful](../_images/DeploySuccessful.png)
 
 
 
@@ -16,7 +18,7 @@ Wait for a ~30 seconds for the deployment to complete.
 
 Click **Check Operator Status** to get the status of the Operator.
 
-
+![StatusSuccessful](../_images/StatusSuccessful.png)
 
 ### 4 - Verify the Operator is deployed from the Kubernetes console
 
@@ -32,15 +34,21 @@ Get the resources installed by the CRD. It should give the resources selected wh
 kubectl get pod,svc,configmap,secret -n nginx-operator-system
 ```
 
-Alternately get the URL of the application and check from the browser.
+Sample output-
+
+![resourcescreated](../_images/resourcescreated.png)
+
+Alternately get the URL of the application you just deployed using the Operator and check from the browser.
 
 ```
-echo "http://<ip>:$(kubectl get service nginxsvc -n nginx-operator-system -o custom-columns=:spec.ports[0].nodePort | tail -1)"
+echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service nginxsvc -n nginx-operator-system -o custom-columns=:spec.ports[0].nodePort | tail -1)"
 ```
 
 ### 5 - Undeploy the Operator
 
 Click **Undeploy** to un-install the Operator and the CRD.
+
+![Undeployed](../_images/Undeployed.png)
 
 ### 6 - Verify the Operator is Undeployed from the Kubernetes console
 
@@ -49,6 +57,5 @@ Check if the namespace created as part of the test still exists.
 ```
 kubectl get namespace nginx-operator-system
 ```
-
 
 
