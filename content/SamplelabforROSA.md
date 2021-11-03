@@ -1,8 +1,13 @@
 ### 1 - APIs for using resources from local k8s and testing on local k8s
+Set variables
+
+```execute
+export IPaddr=$(hostname -I | cut -d' ' -f2) 
+```
+
 Switch to using the local Kubernetes
 
 ```execute
-export IPaddr=$(hostname -I | cut -d' ' -f2) ;
 curl --request POST \
   --url "http://${IPaddr}:5001/copyconfig"
 ```
@@ -139,17 +144,18 @@ Verify that the Operator is undeployed.
 Check if the namespace created as part of the test still exists.
 
 ```execute
-kubectl get namespace nginx-operator-system
+kubectl get namespace | grep nginx-operator-system
 ```
 
 
 
 ### 8 - Download the Operator code.
 
+Copy the URL in the browser to download the zip
+
 
 ```execute
-curl --request GET \
-  --url http://${IPaddr}:5001/downloadoperator?operator=nginx-operator
+echo "http://${IPaddr}:5001/downloadoperator?operator=nginx-operator"
 ```
 
 The Operator has the ReadMe for the next steps to certify the Operator.
