@@ -16,7 +16,11 @@ categories:
     - Frontend
 intro: readme.md
 documentation: 
-commands: []
+commands:
+    - name: .
+      cmd: 
+      cwd: /home/student
+      stepMessage: .
 environment:
     terminal:
         name: Terminal
