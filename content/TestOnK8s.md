@@ -31,7 +31,7 @@ kubectl get deployment -n nginx-operator-system
 Get the resources installed by the CRD. It should give the resources selected while creating the Operator. 
 
 ```execute
-	kubectl get pod,svc,configmap,secret -n nginx-operator-system
+kubectl get pod,svc,configmap,secret -n nginx-operator-system
 ```
 
 Sample output-

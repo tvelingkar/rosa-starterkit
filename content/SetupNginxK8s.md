@@ -6,7 +6,7 @@ kubectl create ns local-k8s-setup
 
 ### 2 - Create the secret and configmaps
 
-Create self signed SSL certificate and key to access the application securely.
+Create self signed SSL certificate and key to access the application securely. Press enter for all the field values.
 
 ```execute
 openssl req -nodes -new -x509 -keyout key.pem -out cert.pem -days 365
@@ -56,18 +56,18 @@ cat <<EOF>index.html
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>OpenLabs StarterKit Tutorial</title>
-		<style>
-    	body {
-      	 width: 35em;
-      	 margin: 0 auto;
-       	font-family: Tahoma, Verdana, Arial, sans-serif;
-      	}
-		</style>
+	<title>OpenLabs StarterKit Tutorial</title>
+	<style>
+  body {
+  width: 35em;
+  margin: 0 auto;
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+  }
+	</style>
 	</head>
 	<body>
-		<h1>Kubernetes and OpenShift StarterKit Tutorial</h1>
-		<p>Thank you for going through the Starter Kit Tutorial.</p>
+  <h1>Kubernetes and OpenShift StarterKit Tutorial</h1>
+	<p>Thank you for going through the Starter Kit Tutorial.</p>
 	</body>
 </html>
 EOF
@@ -146,6 +146,6 @@ kubectl create -f nginxapp.yaml -n local-k8s-setup
 ### 4 - Verify the setup is complete
 
 ```execute
-kubectl get svc, pod, configmap, secret -n local-k8s-setup
+kubectl get svc,pod,configmap,secret -n local-k8s-setup
 ```
 

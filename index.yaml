@@ -16,11 +16,7 @@ categories:
     - Frontend
 intro: readme.md
 documentation: 
-commands:
-    - name: Setup the tool
-      cmd: 
-      cwd: /home/student
-      stepMessage: Setting up the tool ....
+commands: []
 environment:
     terminal:
         name: Terminal
