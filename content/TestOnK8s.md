@@ -24,15 +24,19 @@ Click **Check Operator Status** to get the status of the Operator.
 
 Operator is deployed  in the **[operator name]-system** namespace. 
 
-```bash
+```copy
 kubectl get deployment -n nginx-operator-system
 ```
 
 Get the resources installed by the CRD. It should give the resources selected while creating the Operator. 
 
+```copy
+	kubectl get pod,svc,configmap,secret -n nginx-operator-system
 ```
-kubectl get pod,svc,configmap,secret -n nginx-operator-system
-```
+
+
+
+
 
 Sample output-
 
@@ -57,5 +61,4 @@ Check if the namespace created as part of the test still exists.
 ```
 kubectl get namespace nginx-operator-system
 ```
-
 

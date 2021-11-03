@@ -8,19 +8,19 @@ kubectl create ns local-k8s-setup
 
 Create self signed SSL certificate and key to access the application securely.
 
-```bash
+```copy
 openssl req -nodes -new -x509 -keyout key.pem -out cert.pem -days 365
 ```
 
 Create tls secret from the cert and key
 
-```bash
+```copy
 kubectl create secret tls nginxsecret --key key.pem --cert cert.pem  -n local-k8s-setup
 ```
 
 Create the nginx configuration file 
 
-```
+```copy
 cat <<EOF>nginx.conf
 
 server {
@@ -45,13 +45,13 @@ EOF
 
 Create a Configmap for the nginx configuration file.
 
-```
+```copy
 kubectl create configmap nginxconfigmap --from-file=nginx.conf -n local-k8s-setup
 ```
 
 Create the index.html.
 
-```
+```copy
 cat <<EOF>index.html
 <!DOCTYPE html>
 <html>
@@ -75,7 +75,7 @@ EOF
 
 Create a Configmap for the index.html file.
 
-```
+```copy
 kubectl create configmap indexconfigmap --from-file=index.html -n local-k8s-setup
 ```
 
@@ -83,7 +83,7 @@ kubectl create configmap indexconfigmap --from-file=index.html -n local-k8s-setu
 
 Create the yaml file to deploy the service and nginx.
 
-```
+```copy
 cat <<EOF>nginxapp.yaml
 ---
 apiVersion: v1
@@ -139,13 +139,13 @@ EOF
 
 Create the service and application
 
-```bash
+```copy
 kubectl create -f nginxapp.yaml -n local-k8s-setup
 ```
 
 ### 4 - Verify the setup is complete
 
-```bash
+```copy
 kubectl get svc, pod, configmap, secret -n local-k8s-setup
 ```
 
