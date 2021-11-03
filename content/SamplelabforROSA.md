@@ -2,9 +2,9 @@
 Switch to using the local Kubernetes
 
 ```execute
-export IPaddr=$(hostname -I | cut -d' ' -f2)
+export IPaddr=$(hostname -I | cut -d' ' -f2) ;
 curl --request POST \
-  --url http://${IPaddr}:5001/copyconfig
+  --url "http://${IPaddr}:5001/copyconfig"
 ```
 
 
@@ -15,7 +15,7 @@ Fetch from the **local-k8s-setup** namespace from which the list of resources ar
 
 ```execute
 curl --request GET \
-  --url http://${IPaddr}:5001/getresources?namespace=local-k8s-setup
+  --url "http://${IPaddr}:5001/getresources?namespace=local-k8s-setup"
 ```
 
 Sample resource list
@@ -83,7 +83,7 @@ curl --request POST \
 
 ```execute
 curl --request POST \
-  --url http://${IPaddr}:5001/deploy?host=kubernetes&operator=nginx-operator
+  --url "http://${IPaddr}:5001/deploy?host=kubernetes&operator=nginx-operator"
 ```
 
 
@@ -94,7 +94,7 @@ It takes about 30 seconds for the Operator to be up.
 
 ```execute
 curl --request GET \
-  --url http://${IPaddr}:5001/status?operator=nginx-operator&host=kubernetes
+  --url "http://${IPaddr}:5001/status?operator=nginx-operator&host=kubernetes"
 ```
 
 The response can be *True* or *False* or *InstalledButNotReady*
@@ -131,7 +131,7 @@ echo "http://${IPaddr}:$(kubectl get service nginxsvc -n nginx-operator-system -
 
 ```execute
 curl --request DELETE \
-  --url http://${IPaddr}:5001/cleanup?host=kubernetes&operator=nginx-operator
+  --url "http://${IPaddr}:5001/cleanup?host=kubernetes&operator=nginx-operator"
 ```
 
 Verify that the Operator is undeployed.
