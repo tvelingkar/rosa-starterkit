@@ -4,7 +4,7 @@ Switch to using the local Kubernetes
 ```execute
 export IPaddr=$(hostname -I | cut -d' ' -f2)
 curl --request POST \
-  --url http://${IPaddr}:5001/copyconfig 
+  --url http://${IPaddr}:5001/copyconfig
 ```
 
 
@@ -15,7 +15,7 @@ Fetch from the **local-k8s-setup** namespace from which the list of resources ar
 
 ```execute
 curl --request GET \
-  --url 'http://${IPaddr}:5001/getresources?namespace=local-k8s-setup'
+  --url http://${IPaddr}:5001/getresources?namespace=local-k8s-setup
 ```
 
 Sample resource list
@@ -94,7 +94,7 @@ It takes about 30 seconds for the Operator to be up.
 
 ```execute
 curl --request GET \
-  --url 'http://${IPaddr}:5001/status?operator=nginx-operator&host=kubernetes'
+  --url http://${IPaddr}:5001/status?operator=nginx-operator&host=kubernetes
 ```
 
 The response can be *True* or *False* or *InstalledButNotReady*
@@ -122,7 +122,7 @@ Sample output-
 Get the URL of the application you just deployed using the Operator and check from the browser.
 
 ```execute
-echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service nginxsvc -n nginx-operator-system -o custom-columns=:spec.ports[0].nodePort | tail -1)"
+echo "http://${IPaddr}:$(kubectl get service nginxsvc -n nginx-operator-system -o custom-columns=:spec.ports[0].nodePort | tail -1)"
 ```
 
 
@@ -131,7 +131,7 @@ echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service nginxsvc -n ng
 
 ```execute
 curl --request DELETE \
-  --url 'http://${IPaddr}:5001/cleanup?host=kubernetes&operator=nginx-operator'
+  --url http://${IPaddr}:5001/cleanup?host=kubernetes&operator=nginx-operator
 ```
 
 Verify that the Operator is undeployed.
@@ -149,7 +149,7 @@ kubectl get namespace nginx-operator-system
 
 ```execute
 curl --request GET \
-  --url 'http://${IPaddr}:5001/downloadoperator?operator=nginx-operator'
+  --url http://${IPaddr}:5001/downloadoperator?operator=nginx-operator
 ```
 
 The Operator has the ReadMe for the next steps to certify the Operator.
