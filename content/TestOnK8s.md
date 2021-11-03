@@ -24,19 +24,15 @@ Click **Check Operator Status** to get the status of the Operator.
 
 Operator is deployed  in the **[operator name]-system** namespace. 
 
-```copy
+```execute
 kubectl get deployment -n nginx-operator-system
 ```
 
 Get the resources installed by the CRD. It should give the resources selected while creating the Operator. 
 
-```copy
+```execute
 	kubectl get pod,svc,configmap,secret -n nginx-operator-system
 ```
-
-
-
-
 
 Sample output-
 
@@ -44,7 +40,7 @@ Sample output-
 
 Alternately get the URL of the application you just deployed using the Operator and check from the browser.
 
-```
+```execute
 echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service nginxsvc -n nginx-operator-system -o custom-columns=:spec.ports[0].nodePort | tail -1)"
 ```
 
@@ -58,7 +54,7 @@ Click **Undeploy** to un-install the Operator and the CRD.
 
 Check if the namespace created as part of the test still exists.
 
-```
+```execute
 kubectl get namespace nginx-operator-system
 ```
 

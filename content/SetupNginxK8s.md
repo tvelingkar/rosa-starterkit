@@ -1,6 +1,6 @@
 ### 1 - Create the namespace
 
-```bash
+```execute
 kubectl create ns local-k8s-setup
 ```
 
@@ -8,19 +8,19 @@ kubectl create ns local-k8s-setup
 
 Create self signed SSL certificate and key to access the application securely.
 
-```copy
+```execute
 openssl req -nodes -new -x509 -keyout key.pem -out cert.pem -days 365
 ```
 
 Create tls secret from the cert and key
 
-```copy
+```execute
 kubectl create secret tls nginxsecret --key key.pem --cert cert.pem  -n local-k8s-setup
 ```
 
 Create the nginx configuration file 
 
-```copy
+```execute
 cat <<EOF>nginx.conf
 
 server {
@@ -45,13 +45,13 @@ EOF
 
 Create a Configmap for the nginx configuration file.
 
-```copy
+```execute
 kubectl create configmap nginxconfigmap --from-file=nginx.conf -n local-k8s-setup
 ```
 
 Create the index.html.
 
-```copy
+```execute
 cat <<EOF>index.html
 <!DOCTYPE html>
 <html>
@@ -75,7 +75,7 @@ EOF
 
 Create a Configmap for the index.html file.
 
-```copy
+```execute
 kubectl create configmap indexconfigmap --from-file=index.html -n local-k8s-setup
 ```
 
@@ -83,7 +83,7 @@ kubectl create configmap indexconfigmap --from-file=index.html -n local-k8s-setu
 
 Create the yaml file to deploy the service and nginx.
 
-```copy
+```execute
 cat <<EOF>nginxapp.yaml
 ---
 apiVersion: v1
@@ -139,13 +139,13 @@ EOF
 
 Create the service and application
 
-```copy
+```execute
 kubectl create -f nginxapp.yaml -n local-k8s-setup
 ```
 
 ### 4 - Verify the setup is complete
 
-```copy
+```execute
 kubectl get svc, pod, configmap, secret -n local-k8s-setup
 ```
 

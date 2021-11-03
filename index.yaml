@@ -9,7 +9,7 @@ branding:
         text: Starter Kit
         logo: _images/StarterKitLogo.png
 license: 
-duration: 30 mins
+duration: 40 mins
 categories:
     - Backend
     - Express
@@ -40,7 +40,7 @@ config:
         autoExecute: false
         buttonLabel: Execute Commands
 backend:
-    service: k8s
+    service: rosa
 tileInfo:
     - title: Option 1. Setup Nginx application
       description: Create a simple Nginx application on the local K8s.
