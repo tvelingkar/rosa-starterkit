@@ -83,7 +83,7 @@ curl --request POST \
 
 ```execute
 curl --request POST \
-  --url 'http://${IPaddr}:5001/deploy?host=kubernetes&operator=nginx-operator'
+  --url http://${IPaddr}:5001/deploy?host=kubernetes&operator=nginx-operator
 ```
 
 
