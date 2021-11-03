@@ -16,11 +16,15 @@ To create an Operator for his application, the user can bring in his Helm Chart,
 
 ## Objective of tutorial
 
-In this tutorial,we are going to cover following topics:
+The Tutorial aims at creating an Operator for any of the below options:
 
-Option A: Create a sample nginx application whose Operator will be created
+Option A: Setup a sample Nginx application
 
-Option B: 
+Option B: Setup Postgresql Crunchy DB and an application using the DB
+
+Option C: Setup your own application stack
+
+Once any 1 of the above setups are done, go ahead with the topics below: 
 
 1. Create Operator from the local K8s from this Lab
 2. Install the Operator on the local K8s from this Lab

@@ -42,7 +42,7 @@ config:
 backend:
     service: rosa
 tileInfo:
-    - title: Option 1. Setup Nginx application
+    - title: Option A. Setup Nginx application
       description: Create a simple Nginx application on the local K8s.
       duration: 10 min
       content: SetupNginxK8s.md
