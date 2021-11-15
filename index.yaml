@@ -42,24 +42,17 @@ config:
 backend:
     service: rosa
 tileInfo:
-    - title: Option A. Setup Nginx application
-      description: Create a simple Nginx application on the local K8s.
-      duration: 10 min
+    - title: Option A. Operator for Nginx application
+      description: Create an Operator for a Nginx application.
+      duration: 30 min
       content: SetupNginxK8s.md
-    - title: For Lak using APIs
-      description: This is a temporary lab using APIs only
-      duration: 10 min
-      content: SamplelabforROSA.md
-    - title: 1. Create Operator
-      description: Create Operator from the local K8s from this Lab.
-      duration: 15 min
-      content: CreateFromK8s.md
-    - title: 2. Test Operator
-      description: Install the Operator on the local K8s from this Lab.
-      duration: 10 min
-      content: TestOnK8s.md
-    - title: 3. Download Operator
-      description: Download the Operator code.
-      duration: 5 min
-      content: Download.md
+    - title: Option B. Operator for Postgres application
+      description: Create an Operator for a React.js and Postgres DB application.
+      duration: 30 min
+      content: SetupPostgres.md
+    - title: Option C. Coming soon....
+      description: Coming soon....
+      duration: 30 min
+      content: BringYourOwn.md
+
 
