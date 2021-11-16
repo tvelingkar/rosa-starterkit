@@ -155,7 +155,6 @@ Check the URL in the browser
 echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service nginxsvc -n local-k8s-setup -o custom-columns=:spec.ports[0].nodePort | tail -1)"
 ```
 
-### 
 
 ### 5 - Start creating the Operator
 
