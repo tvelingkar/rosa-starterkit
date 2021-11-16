@@ -160,7 +160,7 @@ Update the configuration of the application
 ```execute
 rm -rf /home/student/projects/crunchy-postgres-sample/k8s/contacts-pgcluster.yaml 
 rm -rf /home/student/projects/crunchy-postgres-sample/k8s/contacts-service.yaml
-cd /home/student/projects/crunchy-postgres-sample/k8s && sed -i "s|contacts-db.pgo.svc.cluster.local|contacts|" contacts-backend.deployment.yaml && sed -i "s|contacts.pgo.svc.cluster.local|contacts" contacts-backend.deployment.yaml
+cd /home/student/projects/crunchy-postgres-sample/k8s && sed -i "s|contacts-db.pgo.svc.cluster.local|contacts|" contacts-backend.deployment.yaml && sed -i "s|contacts.pgo.svc.cluster.local|contacts|" contacts-backend.deployment.yaml
 cd /home/student/projects/crunchy-postgres-sample/frontend && export backend_port=30456 && sed -i "s|ip|$ip_addr|" .env && sed -i "s|port|$backend_port|" .env
 skaffold config set default-repo localhost:5000
 ```
@@ -169,6 +169,7 @@ skaffold config set default-repo localhost:5000
 
 Start the application. This step will take ~5 mins.
 ```execute
+cd /home/student/projects/crunchy-postgres-sample
 skaffold run -n pgo
 ```
 
@@ -194,6 +195,40 @@ Choose the Operator Method as **Ansible Operator from Existing Kubernetes Resour
 
 ![OperatorMethod](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/OperatorMethod.png)
 
+### Create a Persistent Volume
+
+Create the Persistent Volume for the Database instance.
+```execute
+cat <<EOF>pvc-db.yaml
+     kind: PersistentVolume
+     apiVersion: v1
+     metadata:
+        name: postgres-pv-volume-new
+        labels:
+          type: local
+          app: postgres
+     spec:
+        storageClassName: manual
+        capacity:
+          storage: 500Mi
+        accessModes:
+         - ReadWriteMany
+        hostPath:
+          path: "/mnt/datanew"
+EOF
+```
+```execute
+kubectl apply -f pvc-db.yaml
+```    
+
+### Initilise the newly created DB
+```execute
+export operatorname="db-application-operator"
+export operator-namespace="${operatorname}-system"
+port=$(kubectl get svc contacts -n $operator-namespace -o custom-columns=:spec.ports[0].nodePort | tail -1)
+cd /home/student/projects/crunchy-postgres-sample
+PGPASSWORD=password psql -U pguser -h $ip_addr -p $port contacts < initialize-db.sql 2>output.txt
+```
 ### 11 - Give the operator details and fetch the resources
 
 Give the name of the Operator and details as below.
