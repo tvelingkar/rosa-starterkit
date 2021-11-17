@@ -7,12 +7,10 @@ To create an Operator for his application, the user can bring in his Helm Chart,
 - Easy to use UI and APIs.
 - Supports creating Helm or Ansible Operators.
 - Supports using your own Kubernetes or OpenShift env or local Kubernetes on the Lab VM
-- Test the Operator by deploying on the Lab VM or your own Openshift.
+- Test the Operator by deploying on the Lab's Kubernetes or on Red Hat OpenShift Service on AWS (ROSA).
 - Operator code can be downloaded for further enhancements.
 
-## Flow of the tutorial
-
-![Flow](_images/Flow.png)
+![ROSA](./_images/ROSA.png)
 
 ## Objective of tutorial
 
