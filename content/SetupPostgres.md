@@ -347,7 +347,7 @@ echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service frontend -n $o
 
 Click **Undeploy** to un-install the Operator and the CRD.
 
-![Undeployed](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/Undeployed.png)
+![Undeployed](../_images/Undeployed.png)
 
 
 
@@ -369,7 +369,9 @@ Goto the **Submit and Download** tab. Click the **Download** button.
 
 ![DownloadSuccessful-OptionB](../_images/DownloadSuccessful-OptionB.png)
 
-###### Alternate method
+
+
+Alternate method.
 
 Goto the main page. Click the download icon of the Operator.
 
