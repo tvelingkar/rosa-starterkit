@@ -10,7 +10,7 @@ To create an Operator for his application, the user can bring in his Helm Chart,
 - Test the Operator by deploying on the Lab's Kubernetes or on Red Hat OpenShift Service on AWS (ROSA).
 - Operator code can be downloaded for further enhancements.
 
-![ROSA](./_images/ROSA.png)
+![ROSA](_images/ROSA.png)
 
 ## Objective of tutorial
 
