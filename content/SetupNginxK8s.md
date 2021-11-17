@@ -154,7 +154,7 @@ Check the URL in the browser
 ```execute
 echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service nginxsvc -n local-k8s-setup -o custom-columns=:spec.ports[0].nodePort | tail -1)"
 ```
-
+We have completed the setup of the application for which we want to create an Operator. The remaining steps explain how to use the StarterKit to create an Operator from this setup.
 
 ### 5 - Start creating the Operator
 
@@ -220,7 +220,7 @@ Goto the **Test** tab. Select the **Use Default Kubernetes** option. Click **Dep
 
 
 
-### 12 - Check Operator status
+### 11 - Check Operator status
 
 Wait for a ~30 seconds for the deployment to complete.
 
@@ -228,7 +228,7 @@ Click **Check Operator Status** to get the status of the Operator.
 
 ![StatusSuccessful](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/StatusSuccessful.png)
 
-### 13 - Verify the Operator is deployed from the Kubernetes console
+### 12 - Verify the Operator is deployed from the Kubernetes console
 
 Operator is deployed  in the **[operator name]-system** namespace. 
 
@@ -252,13 +252,13 @@ Alternately get the URL of the application you just deployed using the Operator 
 echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service nginxsvc -n nginx-operator-system -o custom-columns=:spec.ports[0].nodePort | tail -1)"
 ```
 
-### 14 - Undeploy the Operator
+### 13 - Undeploy the Operator
 
 Click **Undeploy** to un-install the Operator and the CRD.
 
 ![Undeployed](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/Undeployed.png)
 
-### 15 - Verify the Operator is Undeployed from the Kubernetes console
+### 14 - Verify the Operator is Undeployed from the Kubernetes console
 
 Check if the namespace created as part of the test still exists.
 
@@ -266,13 +266,13 @@ Check if the namespace created as part of the test still exists.
 kubectl get namespace nginx-operator-system
 ```
 
-### 16 - Download the Operator Code
+### 15 - Download the Operator Code
 
 Goto the **Submit and Download** tab. Click the **Download** button.
 
 ![Download1](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/Download1.png)
 
-### 17 - Alternate method
+### 16 - Alternate method
 
 Goto the main page. Click the download icon of the Operator.
 

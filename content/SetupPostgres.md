@@ -52,8 +52,8 @@ EOF
 
 ```execute
 kubectl apply -f volume.yaml
-```         
-      
+```
+
 ### 4 - Create the Database
 
 Create the deployment that creates the Database instance.
@@ -98,8 +98,8 @@ EOF
 
 ```execute
 kubectl apply -f deployment.yaml
-```     
-      
+```
+
 ### 5 - Create the Database conectivity
 
 Create the service to communicate with the Database.
@@ -120,10 +120,10 @@ cat <<EOF>service.yaml
           app: postgres
 EOF
 ```
-      
+
 ```execute
 kubectl apply -f service.yaml
-```  
+```
 
 ### 6 - Verify the Database setup 
 
@@ -161,6 +161,9 @@ Update the configuration of the application
 rm -rf /home/student/projects/crunchy-postgres-sample/k8s/contacts-pgcluster.yaml 
 rm -rf /home/student/projects/crunchy-postgres-sample/k8s/contacts-service.yaml
 cd /home/student/projects/crunchy-postgres-sample/k8s && sed -i "s|contacts-db.pgo.svc.cluster.local|contacts|" contacts-backend.deployment.yaml && sed -i "s|contacts.pgo.svc.cluster.local|contacts|" contacts-backend.deployment.yaml
+echo "        - name: REACT_APP_SERVER_URL" >> contacts-frontend.deployment.yaml 
+echo '          value: "http://67.228.124.71:30456/contacts"' >> contacts-frontend.deployment.yaml
+
 cd /home/student/projects/crunchy-postgres-sample/frontend && export backend_port=30456 && sed -i "s|ip|$ip_addr|" .env && sed -i "s|port|$backend_port|" .env
 skaffold config set default-repo localhost:5000
 ```
@@ -179,23 +182,85 @@ Execute the below command. The result should have deployments for Database, back
 ```execute
 kubectl get deployments -n pgo
 ```
-Click on the Key icon on the dashboard and copy the value under the `DNS` section and `IP` field
+![pgodeployments](../_images/pgodeployments.png)
 
-URL :  http://##DNS.ip##:30465
+Copy the URL below and open in a browser to try the application
 
-### 9 - Start creating the Operator using StarterKit
+```execute
+echo "http://${ip_addr}:30465"
+```
+
+ We have completed the setup of the application for which we want to create an Operator. The remaining steps explain how to use the StarterKit to create an Operator from this setup.
+
+### 10 - Start creating the Operator using StarterKit
 
 This tutorial explains creating an Ansible Operator from the Kubernetes setup provided out of the box with this Lab.
 Open the application.
-![CreateOperator1](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/CreateOperator1.png)
+![CreateOperator1](../_images/CreateOperator1.png)
 
-### 10 - Select the Method of creating Operator
+### 11 - Select the Method of creating Operator
 
 Choose the Operator Method as **Ansible Operator from Existing Kubernetes Resources**
 
-![OperatorMethod](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/OperatorMethod.png)
+![OperatorMethod](../_images/OperatorMethod.png)
 
-### Create a Persistent Volume
+
+
+### 12 - Give the operator details and fetch the resources
+
+Give the name of the Operator and details as below.
+
+Since we are fetching from the Kubernetes provided out of the box, select **Use local Kubernetes** option and click button **Use local Kubernetes**.
+
+Give the namespace from where resources are to be fetched. For this lab give the namespace as **pgo**. Click button **Fetch resources** .
+
+The ***\*Add Kind +\**** option on the left panel will be enabled only if the resources are fetched successfully.
+
+
+
+### 13 - Create a Kind using the K8s resources
+
+
+
+Add a new CRD(Kind) using **Add Kind +**
+
+
+
+Give the kind name as **SetupApp**. Select the resources that will make up the CRD.
+
+
+
+
+
+
+
+
+
+
+
+### 14 - Create the Operator
+
+
+
+Goto the Submit & Download tab.
+
+
+
+Click ***\*Submit Operator\**** to create the Operator.
+
+
+
+
+
+
+
+If the Operator is created successfully, you will see a message as below.
+
+
+
+
+
+### 15 - Preparing for the deploying the Operator
 
 Create the Persistent Volume for the Database instance.
 ```execute
@@ -219,33 +284,39 @@ EOF
 ```
 ```execute
 kubectl apply -f pvc-db.yaml
-```    
+```
 
-### Initilise the newly created DB
+Update the operator code to replace older port values
 ```execute
 export operatorname="db-application-operator"
-export operator-namespace="${operatorname}-system"
-port=$(kubectl get svc contacts -n $operator-namespace -o custom-columns=:spec.ports[0].nodePort | tail -1)
+export operatornamespace="$operatorname-system"
+cd /home/student/starterkit/operators/
+cd $operatorname
+sed -i '/port: 4000/a \ \ \ \ \ \ \ \ \ \ nodePort: 30457' roles/setupapp/tasks/main.yml
+
+sed -i 's|30456|30457|' roles/setupapp/tasks/main.yml
+```
+
+
+### Initilise the newly created DB
+
+```execute
+
+port=$(kubectl get svc contacts -n $operatornamespace -o custom-columns=:spec.ports[0].nodePort | tail -1)
 cd /home/student/projects/crunchy-postgres-sample
 PGPASSWORD=password psql -U pguser -h $ip_addr -p $port contacts < initialize-db.sql 2>output.txt
 ```
-### 11 - Give the operator details and fetch the resources
 
-Give the name of the Operator and details as below.
-
-Since we are fetching from the Kubernetes provided out of the box, select **Use local Kubernetes** option and click button **Use local Kubernetes**.
-
-Give the namespace from where resources are to be fetched. For this lab give the namespace as **pgo**. Click button **Fetch resources** .
 
 
 ### 1 - Download the Operator Code
 
 Goto the **Submit and Download** tab. Click the **Download** button.
 
-![Download1](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/Download1.png)
+![Download1](../_images/Download1.png)
 
 ### 2 - Alternate method
 
 Goto the main page. Click the download icon of the Operator.
 
-![](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/Download2.png)
+![](../_images/Download2.png)
