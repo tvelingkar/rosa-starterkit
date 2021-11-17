@@ -161,7 +161,7 @@ Update the configuration of the application
 rm -rf /home/student/projects/crunchy-postgres-sample/k8s/contacts-pgcluster.yaml 
 rm -rf /home/student/projects/crunchy-postgres-sample/k8s/contacts-service.yaml
 cd /home/student/projects/crunchy-postgres-sample/k8s && sed -i "s|contacts-db.pgo.svc.cluster.local|contacts|" contacts-backend.deployment.yaml && sed -i "s|contacts.pgo.svc.cluster.local|contacts|" contacts-backend.deployment.yaml
-echo "        - name: REACT_APP_SERVER_URL" >> contacts-frontend.deployment.yaml 
+echo '        - name: REACT_APP_SERVER_URL' >> contacts-frontend.deployment.yaml 
 echo '          value: "http://67.228.124.71:30456/contacts"' >> contacts-frontend.deployment.yaml
 
 cd /home/student/projects/crunchy-postgres-sample/frontend && export backend_port=30456 && sed -i "s|ip|$ip_addr|" .env && sed -i "s|port|$backend_port|" .env
@@ -184,18 +184,18 @@ kubectl get deployments -n pgo
 ```
 ![pgodeployments](../_images/pgodeployments.png)
 
-Copy the URL below and open in a browser to try the application
+Copy the URL below and open in a browser to try the application.
 
-```execute
-echo "http://${ip_addr}:30465"
-```
+http://{{ DNS.ip }}:30465
 
- We have completed the setup of the application for which we want to create an Operator. The remaining steps explain how to use the StarterKit to create an Operator from this setup.
+![ApplicationUI](../_images/ApplicationUI.png)
+
+We have completed the setup of the application for which we want to create an Operator. The remaining steps explain how to use the StarterKit to create an Operator from this setup.
 
 ### 10 - Start creating the Operator using StarterKit
 
 This tutorial explains creating an Ansible Operator from the Kubernetes setup provided out of the box with this Lab.
-Open the application.
+Open the StarterKit UI.
 ![CreateOperator1](../_images/CreateOperator1.png)
 
 ### 11 - Select the Method of creating Operator
@@ -214,53 +214,35 @@ Since we are fetching from the Kubernetes provided out of the box, select **Use 
 
 Give the namespace from where resources are to be fetched. For this lab give the namespace as **pgo**. Click button **Fetch resources** .
 
-The ***\*Add Kind +\**** option on the left panel will be enabled only if the resources are fetched successfully.
+The **Add Kind +** option on the left panel will be enabled only if the resources are fetched successfully.
 
-
+![OperatorDetails-OptionB](../_images/OperatorDetails-OptionB.png)
 
 ### 13 - Create a Kind using the K8s resources
 
-
-
 Add a new CRD(Kind) using **Add Kind +**
 
-
-
-Give the kind name as **SetupApp**. Select the resources that will make up the CRD.
-
+Give the kind name as **SetupApp**. Select the resources that will make up the CRD. i.e. all the resources that we setup as part of the Database application. (Steps 1 to 9 above)
 
 
 
-
-
-
-
+![Kinddetails-OptionB](../_images/Kinddetails-OptionB.png)
 
 
 
 ### 14 - Create the Operator
 
+Goto the Submit & Download tab. Click **Submit Operator** to create the Operator.
 
-
-Goto the Submit & Download tab.
-
-
-
-Click ***\*Submit Operator\**** to create the Operator.
-
-
-
-
+![Submit-OptionB](../_images/Submit-OptionB.png)
 
 
 
 If the Operator is created successfully, you will see a message as below.
 
+![SubmitSuccessful-OptionB](../_images/SubmitSuccessful-OptionB.png)
 
-
-
-
-### 15 - Preparing for the deploying the Operator
+### 15 - Prepare for the deploying the Operator
 
 Create the Persistent Volume for the Database instance.
 ```execute
@@ -299,69 +281,49 @@ sed -i 's|30456|30457|' roles/setupapp/tasks/main.yml
 
 
 
-### 11 - Deploy the Operator
+### 16 - Deploy the Operator
 
-
-
-![DeploySuccessful](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/DeploySuccessful.png)
-
+![DeploySuccessful](../_images/DeploySuccessful.png)
 
 
 
 
-### 11 - Check Operator status
+
+### 17 - Check Operator status
+
+Wait for a ~60 seconds for the deployment to complete.
+
+Click **Check Operator Status** to get the status of the Operator.
+
+![StatusSuccessful](../_images/StatusSuccessful.png)
 
 
 
-Wait for a ~30 seconds for the deployment to complete.
+### 18 - Verify the Operator is deployed from the Kubernetes console
+
+Operator is deployed  in the **[operator name]-system** namespace. 
 
 
 
-Click ***\*Check Operator Status\**** to get the status of the Operator.
-
-
-
-![StatusSuccessful](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/StatusSuccessful.png)
-
-
-
-### 12 - Verify the Operator is deployed from the Kubernetes console
-
-
-
-Operator is deployed  in the ***\*[operator name]-system\**** namespace. 
-
-
-
-\```execute
-
-kubectl get deployment -n nginx-operator-system
-
-\```
-
-
-
-Get the resources installed by the CRD. It should give the resources selected while creating the Operator. 
-
-
-
-\```execute
-
-kubectl get pod,svc,configmap,secret -n nginx-operator-system
-
-\```
-
-
+```execute
+kubectl get deployment db-application-operator-controller-manager -n $operatornamespace
+```
 
 Sample output-
 
+![Operatordeployment-OptionB](../_images/Operatordeployment-OptionB.png)
 
+Get the resources installed by the CRD. It should give the resources selected while creating the Operator. 
 
-![resourcescreated](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/resourcescreated.png)
+```execute
+kubectl get deployment,service,pvc,secret -n $operatornamespace
+```
 
+Sample output-
 
+![OperatorResources-OptionB](../_images/OperatorResources-OptionB.png)
 
-### Initilise the newly created DB
+### 19 - Initilise the newly created DB
 
 ```execute
 port=$(kubectl get svc contacts -n $operatornamespace -o custom-columns=:spec.ports[0].nodePort | tail -1)
@@ -371,56 +333,44 @@ PGPASSWORD=password psql -U pguser -h $ip_addr -p $port contacts < initialize-db
 
 
 
-### Check the application deloyed by the Operator
+### 20 - Check the application deloyed by the Operator
 
-Alternately get the URL of the application you just deployed using the Operator and check from the browser.
+Get the URL of the application you just deployed using the Operator and check from the browser.
 
+```execute
+echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service frontend -n $operatornamespace -o custom-columns=:spec.ports[0].nodePort | tail -1)"
+```
 
+![ApplicationUI](../_images/ApplicationUI.png)
 
-\```execute
+### 21 - Undeploy the Operator
 
-echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service nginxsvc -n nginx-operator-system -o custom-columns=:spec.ports[0].nodePort | tail -1)"
-
-\```
-
-
-
-### 13 - Undeploy the Operator
-
-
-
-Click ***\*Undeploy\**** to un-install the Operator and the CRD.
-
-
+Click **Undeploy** to un-install the Operator and the CRD.
 
 ![Undeployed](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/Undeployed.png)
 
 
 
-### 14 - Verify the Operator is Undeployed from the Kubernetes console
-
-
+### 22 - Verify the Operator is Undeployed from the Kubernetes console
 
 Check if the namespace created as part of the test still exists.
 
-
-
-\```execute
-
-kubectl get namespace nginx-operator-system
-
-\```
+```execute
+kubectl get namespace $operatornamespace
+```
 
 
 
-### 1 - Download the Operator Code
+### 23 - Download the Operator Code
 
 Goto the **Submit and Download** tab. Click the **Download** button.
 
-![Download1](../_images/Download1.png)
+![Download1-OptionB](../_images/Download1-OptionB.png)
 
-### 2 - Alternate method
+![DownloadSuccessful-OptionB](../_images/DownloadSuccessful-OptionB.png)
+
+###### Alternate method
 
 Goto the main page. Click the download icon of the Operator.
 
-![](../_images/Download2.png)
+![Download2-OptionB](../_images/Download2-OptionB.png)
