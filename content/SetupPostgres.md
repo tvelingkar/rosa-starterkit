@@ -298,14 +298,118 @@ sed -i 's|30456|30457|' roles/setupapp/tasks/main.yml
 ```
 
 
+
+### 11 - Deploy the Operator
+
+
+
+![DeploySuccessful](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/DeploySuccessful.png)
+
+
+
+
+
+### 11 - Check Operator status
+
+
+
+Wait for a ~30 seconds for the deployment to complete.
+
+
+
+Click ***\*Check Operator Status\**** to get the status of the Operator.
+
+
+
+![StatusSuccessful](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/StatusSuccessful.png)
+
+
+
+### 12 - Verify the Operator is deployed from the Kubernetes console
+
+
+
+Operator is deployed  in the ***\*[operator name]-system\**** namespace. 
+
+
+
+\```execute
+
+kubectl get deployment -n nginx-operator-system
+
+\```
+
+
+
+Get the resources installed by the CRD. It should give the resources selected while creating the Operator. 
+
+
+
+\```execute
+
+kubectl get pod,svc,configmap,secret -n nginx-operator-system
+
+\```
+
+
+
+Sample output-
+
+
+
+![resourcescreated](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/resourcescreated.png)
+
+
+
 ### Initilise the newly created DB
 
 ```execute
-
 port=$(kubectl get svc contacts -n $operatornamespace -o custom-columns=:spec.ports[0].nodePort | tail -1)
 cd /home/student/projects/crunchy-postgres-sample
 PGPASSWORD=password psql -U pguser -h $ip_addr -p $port contacts < initialize-db.sql 2>output.txt
 ```
+
+
+
+### Check the application deloyed by the Operator
+
+Alternately get the URL of the application you just deployed using the Operator and check from the browser.
+
+
+
+\```execute
+
+echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service nginxsvc -n nginx-operator-system -o custom-columns=:spec.ports[0].nodePort | tail -1)"
+
+\```
+
+
+
+### 13 - Undeploy the Operator
+
+
+
+Click ***\*Undeploy\**** to un-install the Operator and the CRD.
+
+
+
+![Undeployed](/Users/shraddhaparikh/OpGenerator/GitHub/rosa-starterkit/_images/Undeployed.png)
+
+
+
+### 14 - Verify the Operator is Undeployed from the Kubernetes console
+
+
+
+Check if the namespace created as part of the test still exists.
+
+
+
+\```execute
+
+kubectl get namespace nginx-operator-system
+
+\```
 
 
 
