@@ -1,3 +1,19 @@
+### Initialize variables
+
+Execute the below commnds to initialise the variables. 
+
+**Note:** If you refresh the lab then, initialise the variables and then proceed to Step where you left.
+
+```execute
+export ip_addr=$(ifconfig eth1 | grep inet | awk '{print $2}' | cut -f2 -d:)
+echo $ip_addr
+export operatorname="db-application-operator"
+export operatornamespace="$operatorname-system"
+export kindname="setupapp"
+```
+
+
+
 ### 1 - Create the namespace
 
 ```execute
@@ -127,12 +143,6 @@ kubectl apply -f service.yaml
 
 ### 6 - Verify the Database setup 
 
-Get the Cluster IP:
-
-```execute
-export ip_addr=$(ifconfig eth1 | grep inet | awk '{print $2}' | cut -f2 -d:)
-echo $ip_addr
-```
 Check the connection to the Database
 
 ```execute
@@ -213,11 +223,19 @@ Choose the Operator Method as **Ansible Operator from Existing Kubernetes Resour
 
 ### 12 - Give the operator details and fetch the resources
 
-Give the name of the Operator and details as below.
+Give the name of the Operator and other details same as below.
+
+Operator Name: `db-application-operator`
+
+**Group Name:** `openlabs`
+
+Domain Name: `ibm.com`
+
+Version: `v1beta1`
 
 Since we are fetching from the Kubernetes provided out of the box, select **Use local Kubernetes** option and click button **Use local Kubernetes**.
 
-Give the namespace from where resources are to be fetched. For this lab give the namespace as **pgo**. Click button **Fetch resources** .
+Give the namespace from where resources are to be fetched. For this lab give the namespace as ***pgo***. Click button **Fetch resources** .
 
 The **Add Kind +** option on the left panel will be enabled only if the resources are fetched successfully.
 
@@ -275,16 +293,16 @@ kubectl apply -f pvc-db.yaml
 
 Update the operator code to replace older port values
 ```execute
-export operatorname="db-application-operator"
-export operatornamespace="$operatorname-system"
 
-echo {{ SSH.pass }} | sudo -S sed -i 's|30456|30457|' /root/starterkit/operators/${operatorname}/roles/setupapp/tasks/main.yml
-echo {{ SSH.pass }} | sudo -S sed -i '/port: 4000/a \ \ \ \ \ \ \ \ \ \ nodePort: 30457' /root/starterkit/operators/${operatorname}/roles/setupapp/tasks/main.yml
+echo {{ SSH.pass }} | sudo -S sed -i 's|30456|30457|' /root/starterkit/operators/${operatorname}/roles/${kindname}/tasks/main.yml
+echo {{ SSH.pass }} | sudo -S sed -i '/port: 4000/a \ \ \ \ \ \ \ \ \ \ nodePort: 30457' /root/starterkit/operators/${operatorname}/roles/${kindname}/tasks/main.yml
 ```
 
 
 
 ### 16 - Deploy the Operator
+
+The option **Use Default Kubernetes** is to deploy the Labs local Kubernetes. Click **Deploy** to deploy the Operator.
 
 ![DeploySuccessful](../_images/DeploySuccessful.png)
 
@@ -304,19 +322,17 @@ Click **Check Operator Status** to get the status of the Operator.
 
 ### 18 - Verify the Operator is deployed from the Kubernetes console
 
-Operator is deployed  in the **[operator name]-system** namespace. 
-
-
+NOTE: Operator and the CRDs are deployed  in the **[operator name]-system** namespace. 
 
 ```execute
-kubectl get deployment db-application-operator-controller-manager -n $operatornamespace
+kubectl get deployment "${operatorname}-controller-manager" -n $operatornamespace
 ```
 
 Sample output-
 
 ![Operatordeployment-OptionB](../_images/Operatordeployment-OptionB.png)
 
-Get the resources installed by the CRD. It should give the resources selected while creating the Operator. 
+Get the resources installed by the CRD. The same resources selected from **pgo** namespace are now in the  **db-application-operator-system** namespace
 
 ```execute
 kubectl get deployment,service,pvc,secret -n $operatornamespace
