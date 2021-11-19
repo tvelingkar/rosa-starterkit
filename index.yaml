@@ -9,7 +9,7 @@ branding:
         text: Starter Kit
         logo: _images/StarterKitLogo.png
 license: 
-duration: 40 mins
+duration: 60 mins
 categories:
     - Backend
     - Express

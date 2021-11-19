@@ -161,8 +161,9 @@ Update the configuration of the application
 rm -rf /home/student/projects/crunchy-postgres-sample/k8s/contacts-pgcluster.yaml 
 rm -rf /home/student/projects/crunchy-postgres-sample/k8s/contacts-service.yaml
 cd /home/student/projects/crunchy-postgres-sample/k8s && sed -i "s|contacts-db.pgo.svc.cluster.local|contacts|" contacts-backend.deployment.yaml && sed -i "s|contacts.pgo.svc.cluster.local|contacts|" contacts-backend.deployment.yaml
+echo "" >> contacts-frontend.deployment.yaml
 echo '        - name: REACT_APP_SERVER_URL' >> contacts-frontend.deployment.yaml 
-echo '          value: "http://67.228.124.71:30456/contacts"' >> contacts-frontend.deployment.yaml
+echo '          value: "http://$ip_addr:30456/contacts"' >> contacts-frontend.deployment.yaml
 
 cd /home/student/projects/crunchy-postgres-sample/frontend && export backend_port=30456 && sed -i "s|ip|$ip_addr|" .env && sed -i "s|port|$backend_port|" .env
 skaffold config set default-repo localhost:5000
@@ -186,7 +187,11 @@ kubectl get deployments -n pgo
 
 Copy the URL below and open in a browser to try the application.
 
+```copy
 http://{{ DNS.ip }}:30465
+```
+
+
 
 ![ApplicationUI](../_images/ApplicationUI.png)
 
