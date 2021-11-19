@@ -12,8 +12,6 @@ export operatornamespace="$operatorname-system"
 export kindname="setupapp"
 ```
 
-
-
 ### 1 - Create the namespace
 
 ```execute
@@ -225,21 +223,17 @@ Choose the Operator Method as **Ansible Operator from Existing Kubernetes Resour
 
 Give the name of the Operator and other details same as below.
 
-Operator Name: 
-
-```copy
-db-application-operator
-```
+**Operator Name**: `db-application-operator`
 
 **Group Name:** `openlabs`
 
-Domain Name: `ibm.com`
+**Domain Name**: `ibm.com`
 
-Version: `v1beta1`
+**Version**: `v1beta1`
 
-Since we are fetching from the Kubernetes provided out of the box, select **Use local Kubernetes** option and click button **Use local Kubernetes**.
+Since we are fetching from the Kubernetes provided out of the box, select **Use local Kubernetes** option and click button **Use local Kubernetes** button.
 
-Give the namespace from where resources are to be fetched. For this lab give the namespace as ***pgo***. Click button **Fetch resources** .
+Give the namespace from where resources are to be fetched. For this lab give the namespace as `pgo`. Click button **Fetch resources** button.
 
 The **Add Kind +** option on the left panel will be enabled only if the resources are fetched successfully.
 
