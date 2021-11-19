@@ -278,8 +278,8 @@ Update the operator code to replace older port values
 export operatorname="db-application-operator"
 export operatornamespace="$operatorname-system"
 
-echo {{ SSH.pass }} | sudo -S sed -i 's|30456|30457|' /home/student/starterkit/operators/${operatorname}/roles/setupapp/tasks/main.yml
-echo {{ SSH.pass }} | sudo -S sed -i '/port: 4000/a \ \ \ \ \ \ \ \ \ \ nodePort: 30457' /home/student/starterkit/operators/${operatorname}/roles/setupapp/tasks/main.yml
+echo {{ SSH.pass }} | sudo -S sed -i 's|30456|30457|' /root/starterkit/operators/${operatorname}/roles/setupapp/tasks/main.yml
+echo {{ SSH.pass }} | sudo -S sed -i '/port: 4000/a \ \ \ \ \ \ \ \ \ \ nodePort: 30457' /root/starterkit/operators/${operatorname}/roles/setupapp/tasks/main.yml
 ```
 
 
