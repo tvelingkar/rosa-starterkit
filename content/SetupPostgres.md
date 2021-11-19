@@ -1,6 +1,6 @@
 ### Initialize variables
 
-Execute the below commnds to initialise the variables. 
+Execute the below commnds to initialize the variables. 
 
 **Note:** If you refresh the lab then, initialise the variables and then proceed to Step where you left.
 
@@ -225,7 +225,11 @@ Choose the Operator Method as **Ansible Operator from Existing Kubernetes Resour
 
 Give the name of the Operator and other details same as below.
 
-Operator Name: `db-application-operator`
+Operator Name: 
+
+```copy
+db-application-operator
+```
 
 **Group Name:** `openlabs`
 
