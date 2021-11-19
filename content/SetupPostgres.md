@@ -187,7 +187,7 @@ kubectl get deployments -n pgo
 
 Copy the URL below and open in a browser to try the application.
 
-```
+```copy
 http://{{ DNS.ip }}:30465
 ```
 
@@ -247,7 +247,7 @@ If the Operator is created successfully, you will see a message as below.
 
 ![SubmitSuccessful-OptionB](../_images/SubmitSuccessful-OptionB.png)
 
-### 15 - Prepare for the deploying the Operator
+### 15 - Prepare for deploying the Operator
 
 Create the Persistent Volume for the Database instance.
 ```execute
@@ -277,11 +277,9 @@ Update the operator code to replace older port values
 ```execute
 export operatorname="db-application-operator"
 export operatornamespace="$operatorname-system"
-cd /home/student/starterkit/operators/
-cd $operatorname
-sed -i '/port: 4000/a \ \ \ \ \ \ \ \ \ \ nodePort: 30457' roles/setupapp/tasks/main.yml
 
-sed -i 's|30456|30457|' roles/setupapp/tasks/main.yml
+echo {{ SSH.pass }} | sudo -S sed -i 's|30456|30457|' /home/student/starterkit/operators/${operatorname}/roles/setupapp/tasks/main.yml
+echo {{ SSH.pass }} | sudo -S sed -i '/port: 4000/a \ \ \ \ \ \ \ \ \ \ nodePort: 30457' /home/student/starterkit/operators/${operatorname}/roles/setupapp/tasks/main.yml
 ```
 
 
