@@ -38,7 +38,7 @@ server {
     
         location / {
           root /usr/share/nginx/html;
-          try_files $uri /index.html;
+          try_files \$uri /index.html;
         }
 }
 EOF
@@ -171,11 +171,19 @@ Choose the Operator Method as **Ansible Operator from Existing Kubernetes Resour
 
 ### 7 - Give the operator details and fetch the resources
 
-Give the name of the Operator and details as below.
+Give the name of the Operator and other details same as below.
+
+**Operator Name**: `nginx-operator`
+
+**Group Name:** `openlabs`
+
+**Domain Name**: `ibm.com`
+
+**Version**: `v1beta1`
 
 Since we are fetching from the Kubernetes provided out of the box, select **Use local Kubernetes** option and click button **Use local Kubernetes**.
 
-Give the namespace from where resources are to be fetched. For this lab give the namespace as **local-k8s-setup**. Click button **Fetch resources** .
+Give the namespace from where resources are to be fetched. For this lab give the namespace as `local-k8s-setup` Click button **Fetch resources** .
 
  
 
@@ -187,11 +195,9 @@ The **Add Kind +** option on the left panel will be enabled only if the resource
 
 Add a new CRD(Kind) using **Add Kind +**
 
-Give the kind name. Select the resources that will make up the CRD.
+Give the kind name as `InstallApplication` Select the resources that will make up the CRD.
 
 ![Kinddetails](../_images/Kinddetails.png)
-
-More than 1 Kind can be added.
 
 ### 9 - Create the Operator
 
