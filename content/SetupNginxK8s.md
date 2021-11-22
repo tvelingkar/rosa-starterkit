@@ -37,7 +37,8 @@ server {
         ssl_certificate_key /etc/nginx/ssl/tls.key;
     
         location / {
-                try_files $uri $uri/ =404;
+          root /usr/share/nginx/html;
+   				try_files $uri /index.html;
         }
 }
 EOF
