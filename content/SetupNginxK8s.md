@@ -130,6 +130,8 @@ spec:
     volumeMounts:
     - mountPath: /etc/nginx/ssl
       name: secret-volume
+    - mountPath: /etc/nginx/conf.d
+      name: configmap-volume
     - mountPath: /usr/share/nginx/html
       name: index-volume
 EOF
