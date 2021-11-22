@@ -207,8 +207,8 @@ We have completed the setup of the application for which we want to create an Op
 
 ### 10 - Start creating the Operator using StarterKit
 
-This tutorial explains creating an Ansible Operator from the Kubernetes setup provided out of the box with this Lab.
-Open the StarterKit UI.
+This tutorial explains creating an Ansible Operator from the Postgresql DB and Application we jsut setup.
+Open the StarterKit UI. Click **Create New Operator** button.
 ![CreateOperator1](../_images/CreateOperator1.png)
 
 ### 11 - Select the Method of creating Operator
@@ -291,9 +291,11 @@ kubectl apply -f pvc-db.yaml
 
 Update the operator code to replace older port values
 ```execute
-
-echo {{ SSH.pass }} | sudo -S sed -i 's|30456|30457|' /root/starterkit/operators/${operatorname}/roles/${kindname}/tasks/main.yml
-echo {{ SSH.pass }} | sudo -S sed -i '/port: 4000/a \ \ \ \ \ \ \ \ \ \ nodePort: 30457' /root/starterkit/operators/${operatorname}/roles/${kindname}/tasks/main.yml
+export operatorname="db-application-operator"
+export operatornamespace="$operatorname-system"
+export kindname="setupapp"
+echo {{ SSH.pass }} | sudo -S sed -i 's|30456|30457|' /root/starterkit/operators/$operatorname/roles/$kindname/tasks/main.yml
+echo {{ SSH.pass }} | sudo -S sed -i '/port: 4000/a \ \ \ \ \ \ \ \ \ \ nodePort: 30457' /root/starterkit/operators/$operatorname/roles/$kindname/tasks/main.yml
 ```
 
 
