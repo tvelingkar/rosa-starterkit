@@ -294,8 +294,8 @@ Update the operator code to replace older port values
 export operatorname="db-application-operator"
 export operatornamespace="$operatorname-system"
 export kindname="setupapp"
-echo {{ SSH.pass }} | sudo -S sed -i 's|30456|30457|' /root/starterkit/operators/$operatorname/roles/$kindname/tasks/main.yml
-echo {{ SSH.pass }} | sudo -S sed -i '/port: 4000/a \ \ \ \ \ \ \ \ \ \ nodePort: 30457' /root/starterkit/operators/$operatorname/roles/$kindname/tasks/main.yml
+echo {{ SSH.pass }} | sudo -S sed -i 's|30456|30457|' /opt/starterKit/operators/$operatorname/roles/$kindname/tasks/main.yml
+echo {{ SSH.pass }} | sudo -S sed -i '/port: 4000/a \ \ \ \ \ \ \ \ \ \ nodePort: 30457' /opt/starterKit/operators/$operatorname/roles/$kindname/tasks/main.yml
 ```
 
 
