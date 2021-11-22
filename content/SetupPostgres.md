@@ -322,7 +322,9 @@ Click **Check Operator Status** to get the status of the Operator.
 
 ### 18 - Verify the Operator is deployed from the Kubernetes console
 
-NOTE: Operator and the CRDs are deployed  in the **[operator name]-system** namespace. 
+NOTE: Operator and the CRDs are deployed  in the **db-application-operator-system** namespace. 
+
+Check if the Operator deployment is ready
 
 ```execute
 kubectl get deployment "${operatorname}-controller-manager" -n $operatornamespace
@@ -332,7 +334,7 @@ Sample output-
 
 ![Operatordeployment-OptionB](../_images/Operatordeployment-OptionB.png)
 
-Get the resources installed by the CRD. The same resources selected from **pgo** namespace are now in the  **db-application-operator-system** namespace
+Get the resources installed by the CRD. The same resources selected from **pgo** namespace are now deployed in the  **db-application-operator-system** namespace by the Operator
 
 ```execute
 kubectl get deployment,service,pvc,secret -n $operatornamespace
@@ -354,7 +356,7 @@ PGPASSWORD=password psql -U pguser -h $ip_addr -p $port contacts < initialize-db
 
 ### 20 - Check the application deloyed by the Operator
 
-Get the URL of the application you just deployed using the Operator and check from the browser.
+Copy the URL of the application you just deployed using the Operator and open it from the browser.  The application's port is different from the application running in **pgo** namespace.
 
 ```execute
 echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service frontend -n $operatornamespace -o custom-columns=:spec.ports[0].nodePort | tail -1)"
@@ -372,7 +374,7 @@ Click **Undeploy** to un-install the Operator and the CRD.
 
 ### 22 - Verify the Operator is Undeployed from the Kubernetes console
 
-Check if the namespace created as part of the test still exists.
+Check if the namespace created by the Operator still exists.
 
 ```execute
 kubectl get namespace $operatornamespace

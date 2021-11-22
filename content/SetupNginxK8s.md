@@ -6,10 +6,10 @@ kubectl create ns local-k8s-setup
 
 ### 2 - Create the secret and configmaps
 
-Create self signed SSL certificate and key to access the application securely. Press enter for all the field values.
+Create self signed SSL certificate and key to access the application securely. 
 
 ```execute
-openssl req -nodes -new -x509 -keyout key.pem -out cert.pem -days 365
+openssl req -nodes -new -x509 -keyout key.pem -out cert.pem -days 365 -subj "/C=US/ST=NY/L=NY/O=IBM/OU=DGC/CN=open-trial-labs.ibm.com"
 ```
 
 Create tls secret from the cert and key
@@ -24,8 +24,8 @@ Create the nginx configuration file
 cat <<EOF>nginx.conf
 
 server {
-        listen 80 default_server;
-        listen [::]:80 default_server ipv6only=on;
+        listen 8080 default_server;
+        listen [::]:8080 default_server ipv6only=on;
 
         listen 443 ssl;
     
@@ -95,7 +95,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 80
+  - port: 8080
     protocol: TCP
     name: http
   - port: 443
@@ -123,15 +123,13 @@ spec:
        name: indexconfigmap
   containers:
   - name: nginxhttps
-    image: nginx
+    image: nginx:1.19.2
     ports:
     - containerPort: 443
-    - containerPort: 80
+    - containerPort: 8080
     volumeMounts:
     - mountPath: /etc/nginx/ssl
       name: secret-volume
-    - mountPath: /etc/nginx/conf.d
-      name: configmap-volume
     - mountPath: /usr/share/nginx/html
       name: index-volume
 EOF
@@ -220,7 +218,7 @@ Goto the **Test** tab. Select the **Use Default Kubernetes** option. Click **Dep
 
 
 
-### 11 - Check Operator status
+### 12 - Check Operator status
 
 Wait for a ~30 seconds for the deployment to complete.
 
@@ -228,7 +226,7 @@ Click **Check Operator Status** to get the status of the Operator.
 
 ![StatusSuccessful](../_images/StatusSuccessful.png)
 
-### 12 - Verify the Operator is deployed from the Kubernetes console
+### 13 - Verify the Operator is deployed from the Kubernetes console
 
 Operator is deployed  in the **[operator name]-system** namespace. 
 
@@ -252,13 +250,13 @@ Alternately get the URL of the application you just deployed using the Operator 
 echo "http://$(hostname -I | cut -d' ' -f2):$(kubectl get service nginxsvc -n nginx-operator-system -o custom-columns=:spec.ports[0].nodePort | tail -1)"
 ```
 
-### 13 - Undeploy the Operator
+### 14 - Undeploy the Operator
 
 Click **Undeploy** to un-install the Operator and the CRD.
 
 ![Undeployed](../_images/Undeployed.png)
 
-### 14 - Verify the Operator is Undeployed from the Kubernetes console
+### 15 - Verify the Operator is Undeployed from the Kubernetes console
 
 Check if the namespace created as part of the test still exists.
 
@@ -266,13 +264,13 @@ Check if the namespace created as part of the test still exists.
 kubectl get namespace nginx-operator-system
 ```
 
-### 15 - Download the Operator Code
+### 16 - Download the Operator Code
 
 Goto the **Submit and Download** tab. Click the **Download** button.
 
 ![Download1](../_images/Download1.png)
 
-### 16 - Alternate method
+Alternate method
 
 Goto the main page. Click the download icon of the Operator.
 
