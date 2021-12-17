@@ -1,6 +1,7 @@
 ---
 name: Kubernetes and OpenShift Operator StarterKit
 description: Convert your Helm Charts, Docker images and Kubernetes setups into Operators with a few clicks. You can test the Operator created before downloading it.
+private: false
 branding:
     logo: _images/StarterKitLogo.png
     banner: _images/banner.png
