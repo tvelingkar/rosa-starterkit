@@ -1,7 +1,6 @@
 ---
 name: Kubernetes and OpenShift Operator StarterKit
 description: Convert your Helm Charts, Docker images and Kubernetes setups into Operators with a few clicks. You can test the Operator created before downloading it.
-private: false
 branding:
     logo: _images/StarterKitLogo.png
     banner: _images/banner.png
@@ -41,7 +40,7 @@ config:
         autoExecute: false
         buttonLabel: Execute Commands
 backend:
-    service: rosa
+    service: MOCK-SERVICE
 tileInfo:
     - title: Option A. Operator for Nginx application
       description: Create an Operator for a Nginx application.
